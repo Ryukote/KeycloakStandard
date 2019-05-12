@@ -16,7 +16,10 @@ you can call this library from .NET Framework (> 4.6.1), .NET Core (> 2.0) and o
     "KeycloakStandard.Models" namespace and fill every property under that object:
 
 ```csharp
-ClientData clientData = new ClientData();
+ClientData clientData = new ClientData()
+{
+    ...
+};
 ```
 
 3) Next, you need to make an instance of Client object that resides under
@@ -46,7 +49,7 @@ To register new user in the Keycloak database, you need to make an instance of R
 ```csharp
 Registration registration = new Registration
 {
-  ...
+    ...
 };
 ```
 Then, you pass that Registration object to KeycloakRegistration method:
@@ -62,7 +65,7 @@ First, you need to make an instance of Logout object and fill the data. Logout r
 ```csharp
 Logout logout = new Logout()
 {
-  ...
+    ...
 };
 ```
 
@@ -80,7 +83,7 @@ First, you need to make an instance of DeleteUser object and fill the data. Dele
 ```csharp
 DeleteUser<TUserIdType> deleteUser = new DeleteUser<TUserIdType>()
 {
-  ...
+    ...
 };
 ```
 
