@@ -3,7 +3,7 @@ Keycloak wrapper in .NET Standard
 
 ### Getting started
 KeycloakStandard is a library for working with Keycloak from .NET Standard 2.0, which means
-you can call this library from .NET Framework (> 4.6.1), .NET Core (> 2.0) and others.
+you can call this library from .NET Framework (>= 4.6.1), .NET Core (>= 2.0) and others.
 
 [Check](https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support) if your project is compliant with .NET Standard 2.0
 ## Getting started
