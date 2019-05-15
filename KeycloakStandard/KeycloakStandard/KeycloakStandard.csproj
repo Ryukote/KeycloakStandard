@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/Ryukote/KeycloakStandard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Ryukote/KeycloakStandard</RepositoryUrl>
+    <Authors>Antonio Halužan</Authors>
+    <Company />
+    <Description>Keycloak client for .NET Standard.</Description>
   </PropertyGroup>
 
   <ItemGroup>
