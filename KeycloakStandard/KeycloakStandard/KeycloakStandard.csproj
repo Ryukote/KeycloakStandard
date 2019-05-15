@@ -7,6 +7,8 @@
     <Authors>Antonio Halužan</Authors>
     <Company />
     <Description>Keycloak client for .NET Standard.</Description>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
