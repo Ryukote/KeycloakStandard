@@ -47,5 +47,6 @@ namespace KeycloakStandard.Models
         /// </summary>
         [JsonProperty("scope")]
         public string Scope { get; set; }
+        public string UserId { get; set; }
     }
 }

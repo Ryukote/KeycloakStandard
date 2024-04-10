@@ -3,9 +3,9 @@
     /// <summary>
     /// Data for deleting user.
     /// </summary>
-    public class DeleteUser<TId> where TId : struct
+    public class DeleteUser
     {
         public string AccessToken { get; set; }
-        public TId UserGuid { get; set; }
+        public string UserId { get; set; }
     }
 }
