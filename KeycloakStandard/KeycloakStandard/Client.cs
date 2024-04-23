@@ -233,5 +233,38 @@ namespace KeycloakStandard
                 }
             }
         }
+
+        /// <summary>
+        /// Register new user with filled Registration object.
+        /// </summary>
+        /// <param name="userRegistration">Instance of Registration object with filled data.</param>
+        /// <returns></returns>
+        public async Task UpdateUser(UpdateUser updateUser, string userId)
+        {
+            KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
+
+            var updatedUser = new UpdateUser()
+            {
+                Email = updateUser.Email,
+                EmailVerified = updateUser.EmailVerified,
+                Enabled = updateUser.Enabled,
+                LastName = updateUser.LastName,
+                Username = updateUser.Username,
+                Attributes = updateUser.Attributes
+            };
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(updatedUser)))
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    var response = await httpClient.PutAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.UserEndpoint(_clientData.RealmName)}/${userId}", httpContent);
+
+                    var a = response?.Content?.ReadAsStringAsync();
+                }
+            }
+        }
     }
 }
