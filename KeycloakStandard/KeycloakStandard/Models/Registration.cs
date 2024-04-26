@@ -16,6 +16,6 @@ namespace KeycloakStandard.Models
         public string Password { get; set; }
         public string CredentialType { get; set; }
         public bool Temporary { get; set; }
-        public JProperty[] Attributes { get; set; }
+        public Attributes Attributes { get; set; }
     }
 }

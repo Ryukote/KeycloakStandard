@@ -10,6 +10,8 @@ namespace KeycloakStandard.Models
         public string Email { get; set; }
         [JsonProperty("username")]
         public string Username { get; set; }
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
         [JsonProperty("lastName")]
         public string LastName { get; set; }
         [JsonProperty("credentials")]
@@ -19,6 +21,6 @@ namespace KeycloakStandard.Models
         [JsonProperty("emailVerified")]
         public bool EmailVerified { get; set; }
         [JsonProperty("attributes")]
-        public JProperty[] Attributes { get; set; }
+        public Attributes Attributes { get; set; }
     }
 }

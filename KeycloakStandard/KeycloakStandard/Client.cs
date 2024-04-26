@@ -1,5 +1,6 @@
 ﻿using KeycloakStandard.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -61,44 +62,56 @@ namespace KeycloakStandard
         /// <returns></returns>
         public async Task<string> Registration(Registration userRegistration)
         {
-            KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
-
-            StringBuilder data = new StringBuilder();
-
-            var collection = new List<Credentials>();
-
-            collection.Add(new Credentials()
+            try
             {
-                Temporary = userRegistration.Temporary,
-                Type = userRegistration.CredentialType,
-                Value = userRegistration.Password
-            });
+                KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
 
-            var newUser = new CreateUser()
-            {
-                Credentials = collection,
-                Email = userRegistration.Email,
-                EmailVerified = userRegistration.EmailVerified,
-                Enabled = userRegistration.Enabled,
-                LastName = userRegistration.LastName,
-                Username = userRegistration.Username
-            };
+                StringBuilder data = new StringBuilder();
 
-            using (HttpClient httpClient = new HttpClient())
-            {
-                using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(newUser)))
+                var collection = new List<Credentials>
                 {
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
-                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    new Credentials()
+                    {
+                        Temporary = userRegistration.Temporary,
+                        Type = userRegistration.CredentialType,
+                        Value = userRegistration.Password
+                    }
+                };
 
-                    var response = await httpClient.PostAsync(_clientData.BaseUrl + KeycloakEndpoints.UserEndpoint(_clientData.RealmName), httpContent);
+                //var attributes = new Attributes();
 
-                    var a = response?.Content?.ReadAsStringAsync();
+                var newUser = new CreateUser()
+                {
+                    Credentials = collection,
+                    Email = userRegistration.Email,
+                    EmailVerified = userRegistration.EmailVerified,
+                    Enabled = userRegistration.Enabled,
+                    FirstName = userRegistration.FirstName,
+                    LastName = userRegistration.LastName,
+                    Username = userRegistration.Username,
+                    Attributes = userRegistration.Attributes
+                };
 
-                    string[] locationSegments = response.Headers.Location.AbsoluteUri.Split('/');
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(newUser)))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    return locationSegments[locationSegments.Length - 1];
+                        var response = await httpClient.PostAsync(_clientData.BaseUrl + KeycloakEndpoints.UserEndpoint(_clientData.RealmName), httpContent);
+
+                        var a = response?.Content?.ReadAsStringAsync();
+
+                        string[] locationSegments = response.Headers.Location.AbsoluteUri.Split('/');
+
+                        return locationSegments[locationSegments.Length - 1];
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                throw;
             }
         }
 
@@ -241,29 +254,32 @@ namespace KeycloakStandard
         /// <returns></returns>
         public async Task UpdateUser(UpdateUser updateUser, string userId)
         {
-            KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
-
-            var updatedUser = new UpdateUser()
+            try
             {
-                Email = updateUser.Email,
-                EmailVerified = updateUser.EmailVerified,
-                Enabled = updateUser.Enabled,
-                LastName = updateUser.LastName,
-                Username = updateUser.Username,
-                Attributes = updateUser.Attributes
-            };
+                KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
 
-            using (HttpClient httpClient = new HttpClient())
-            {
-                using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(updatedUser)))
+                var updatedUser = new UpdateUser()
                 {
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
-                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    Id = userId,
+                    Attributes = updateUser.Attributes
+                };
 
-                    var response = await httpClient.PutAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.UserEndpoint(_clientData.RealmName)}/${userId}", httpContent);
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(updatedUser)))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    var a = response?.Content?.ReadAsStringAsync();
+                        var response = await httpClient.PutAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.UserEndpoint(_clientData.RealmName)}/${userId}", httpContent);
+
+                        var a = response?.Content?.ReadAsStringAsync();
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                throw;
             }
         }
     }

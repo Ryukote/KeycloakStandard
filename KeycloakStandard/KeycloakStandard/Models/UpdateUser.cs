@@ -1,15 +1,18 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace KeycloakStandard.Models
 {
     public class UpdateUser
     {
+        [JsonProperty("id")]
+        public string Id { get; set; }
         [JsonProperty("email")]
         public string Email { get; set; }
         [JsonProperty("username")]
         public string Username { get; set; }
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
         [JsonProperty("lastName")]
         public string LastName { get; set; }
         [JsonProperty("enabled")]
@@ -17,6 +20,6 @@ namespace KeycloakStandard.Models
         [JsonProperty("emailVerified")]
         public bool EmailVerified { get; set; }
         [JsonProperty("attributes")]
-        public JProperty[] Attributes { get; set; }
+        public Attributes Attributes { get; set; }
     }
 }
