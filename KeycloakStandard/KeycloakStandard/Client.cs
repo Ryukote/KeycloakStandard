@@ -109,7 +109,7 @@ namespace KeycloakStandard
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -277,7 +277,28 @@ namespace KeycloakStandard
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> GetAllUsersAsync()
+        {
+            try
+            {
+                KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
+
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+
+                    var response = await httpClient.GetAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.UserEndpoint(_clientData.RealmName)}");
+
+                    return await response?.Content?.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
             {
                 throw;
             }
