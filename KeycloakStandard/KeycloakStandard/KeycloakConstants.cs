@@ -12,6 +12,6 @@
         public static string LogoutEndpoint(string realmName) => $"realms/{realmName}/protocol/openid-connect/logout";
 
         public static string ClientEndpoint(string realmName) => $"admin/realms/${realmName}/clients";
-        public static string ClientRolesForUserEndpoint(string realmName, string clientId) => $"admin/realms/{realmName}/users/role-mappings/clients/{clientId}";
+        public static string ClientRolesForUserEndpoint(string realmName, string clientId, string userId) => $"admin/realms/{realmName}/users/{userId}/role-mappings/clients/{clientId}";
     }
 }

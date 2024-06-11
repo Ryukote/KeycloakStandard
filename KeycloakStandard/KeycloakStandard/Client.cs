@@ -315,8 +315,9 @@ namespace KeycloakStandard
                     using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(roles)))
                     {
                         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                        var response = await httpClient.PostAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.ClientRolesForUserEndpoint(_clientData.RealmName, _clientData.ClientId)}", httpContent);
+                        var response = await httpClient.PostAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.ClientRolesForUserEndpoint(_clientData.RealmName, _clientData.ClientId, userId.ToString())}", httpContent);
 
                         return response.StatusCode.Equals(HttpStatusCode.NoContent);
                     }
