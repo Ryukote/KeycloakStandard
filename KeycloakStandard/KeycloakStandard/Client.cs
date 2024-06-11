@@ -303,5 +303,29 @@ namespace KeycloakStandard
                 throw;
             }
         }
+
+        public async Task<bool> AssignClientRolesToUserAsync(Guid userId, ICollection<ClientRole> roles)
+        {
+            try
+            {
+                KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
+
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(roles)))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+
+                        var response = await httpClient.PostAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.ClientRolesForUserEndpoint(_clientData.RealmName, _clientData.ClientId)}", httpContent);
+
+                        return response.StatusCode.Equals(HttpStatusCode.NoContent);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

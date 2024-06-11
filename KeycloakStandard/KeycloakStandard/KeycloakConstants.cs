@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace KeycloakStandard
+﻿namespace KeycloakStandard
 {
     /// <summary>
     /// Standard Keycloak endpoints
@@ -14,5 +12,6 @@ namespace KeycloakStandard
         public static string LogoutEndpoint(string realmName) => $"realms/{realmName}/protocol/openid-connect/logout";
 
         public static string ClientEndpoint(string realmName) => $"admin/realms/${realmName}/clients";
+        public static string ClientRolesForUserEndpoint(string realmName, string clientId) => $"admin/realms/{realmName}/users/role-mappings/clients/{clientId}";
     }
 }
