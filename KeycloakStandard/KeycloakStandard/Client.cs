@@ -328,5 +328,35 @@ namespace KeycloakStandard
                 throw;
             }
         }
+
+        /// <summary>
+        /// Reset password for provided Keycloak user id.
+        /// </summary>
+        /// <param name="userId">User id that can be found in user details in Keycloak.</param>
+        /// <returns></returns>
+        public async Task ResetPassword(string userId, ResetPassword resetPassword)
+        {
+            try
+            {
+                KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
+
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(resetPassword)))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                        var response = await httpClient.PutAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.ResetPasswordEndpoint(_clientData.RealmName, userId)}", httpContent);
+
+                        var a = response?.Content?.ReadAsStringAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
