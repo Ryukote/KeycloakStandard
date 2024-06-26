@@ -1,4 +1,5 @@
-﻿using KeycloakStandard.Models;
+﻿using KeycloakStandard.Exceptions;
+using KeycloakStandard.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -101,13 +102,24 @@ namespace KeycloakStandard
 
                         var response = await httpClient.PostAsync(_clientData.BaseUrl + KeycloakEndpoints.UserEndpoint(_clientData.RealmName), httpContent);
 
+                        if (response.StatusCode == HttpStatusCode.Conflict)
+                        {
+                            throw new UserAlreadyExistException(await response?.Content?.ReadAsStringAsync());
+                        }
+
                         var a = response?.Content?.ReadAsStringAsync();
+
+
 
                         string[] locationSegments = response.Headers.Location.AbsoluteUri.Split('/');
 
                         return locationSegments[locationSegments.Length - 1];
                     }
                 }
+            }
+            catch(UserAlreadyExistException ex)
+            {
+                throw;
             }
             catch (Exception ex)
             {
