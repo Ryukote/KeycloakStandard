@@ -370,5 +370,33 @@ namespace KeycloakStandard
                 throw;
             }
         }
+
+        public async Task AssignRealmRolesToUser(RoleRepresentation data, string userId)
+        {
+            try
+            {
+                KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
+
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    var list = new List<RoleRepresentation>();
+                    list.Add(data);
+
+                    using (HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(list)))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                        var response = await httpClient.PostAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.AssignRealmRoleToUserEndpoint(_clientData.RealmName, userId)}", httpContent);
+
+                        var a = response?.Content?.ReadAsStringAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
