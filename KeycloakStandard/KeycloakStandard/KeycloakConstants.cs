@@ -15,5 +15,6 @@
         public static string ClientRolesForUserEndpoint(string realmName, string clientId, string userId) => $"admin/realms/{realmName}/users/{userId}/role-mappings/clients/{clientId}";
         public static string ResetPasswordEndpoint(string realmName, string userId) => $"admin/realms/{realmName}/users/{userId}/reset-password";
         public static string AssignRealmRoleToUserEndpoint(string realmName, string userId) => $"admin/realms/{realmName}/users/{userId}/role-mappings/realm";
+        public static string UserInfoEndpoint(string realmName, string userId) => $"admin/realms/{realmName}/users/{userId}";
     }
 }

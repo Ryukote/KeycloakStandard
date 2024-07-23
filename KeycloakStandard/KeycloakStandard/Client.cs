@@ -398,5 +398,39 @@ namespace KeycloakStandard
                 throw;
             }
         }
+
+        /// <summary>
+        /// Get user information.
+        /// </summary>
+        /// <param name="keycloakUserId">User Id that can be found in Keycloak when viewing user in the realm.</param>
+        /// <returns></returns>
+        public async Task<UserInfo> GetUserInfo(string keycloakUserId)
+        {
+            KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+
+                var response = await httpClient.GetAsync(_clientData.BaseUrl + KeycloakEndpoints.UserInfoEndpoint(_clientData.RealmName, keycloakUserId));
+
+                if (response.StatusCode.Equals(HttpStatusCode.OK))
+                {
+                    return JsonConvert.DeserializeObject<UserInfo>(await response.Content.ReadAsStringAsync());
+                }
+
+                if (response.StatusCode.Equals(HttpStatusCode.Unauthorized))
+                {
+                    throw new Exception();
+                }
+
+                else if (response.StatusCode.Equals(HttpStatusCode.Forbidden))
+                {
+                    throw new Exception();
+                }
+
+                throw new Exception();
+            }
+        }
     }
 }
