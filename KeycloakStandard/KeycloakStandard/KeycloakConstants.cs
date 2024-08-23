@@ -16,5 +16,7 @@
         public static string ResetPasswordEndpoint(string realmName, string userId) => $"admin/realms/{realmName}/users/{userId}/reset-password";
         public static string AssignRealmRoleToUserEndpoint(string realmName, string userId) => $"admin/realms/{realmName}/users/{userId}/role-mappings/realm";
         public static string UserInfoEndpoint(string realmName, string userId) => $"admin/realms/{realmName}/users/{userId}";
+
+        public static string UserImpersonationEndpoint(string realmName, string userId) => $"admin/realms/{realmName}/users/{userId}/impersonation";
     }
 }

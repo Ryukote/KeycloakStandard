@@ -56,6 +56,44 @@ namespace KeycloakStandard
             }
         }
 
+        //        POST /admin/realms/{realm
+        //    }/users/{user-id
+        //}/ impersonation
+
+        public async Task<string> Impersonation(string userId)
+        {
+            try
+            {
+                KeycloakToken token = await Login(_clientData.AdminUsername, _clientData.AdminPassword);
+
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    using (HttpContent emptyContent = new StringContent(string.Empty))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                        emptyContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                        var response = await httpClient.PostAsync(_clientData.BaseUrl + KeycloakEndpoints.UserImpersonationEndpoint(_clientData.RealmName, userId), emptyContent);
+
+                        //if (response.StatusCode == HttpStatusCode.Conflict)
+                        //{
+                        //    throw new UserAlreadyExistException(await response?.Content?.ReadAsStringAsync());
+                        //}
+
+                        var a = response?.Content?.ReadAsStringAsync();
+
+                        string[] locationSegments = response.Headers.Location.AbsoluteUri.Split('/');
+
+                        return locationSegments[locationSegments.Length - 1];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Register new user with filled Registration object.
         /// </summary>
@@ -78,8 +116,6 @@ namespace KeycloakStandard
                         Value = userRegistration.Password
                     }
                 };
-
-                //var attributes = new Attributes();
 
                 var newUser = new CreateUser()
                 {
@@ -108,8 +144,6 @@ namespace KeycloakStandard
                         }
 
                         var a = response?.Content?.ReadAsStringAsync();
-
-
 
                         string[] locationSegments = response.Headers.Location.AbsoluteUri.Split('/');
 
@@ -295,7 +329,7 @@ namespace KeycloakStandard
             }
         }
 
-        public async Task<string> GetAllUsersAsync()
+        public async Task<ICollection<UserDetails>> GetAllUsersAsync()
         {
             try
             {
@@ -305,9 +339,11 @@ namespace KeycloakStandard
                 {
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
 
-                    var response = await httpClient.GetAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.UserEndpoint(_clientData.RealmName)}");
+                    var response = await httpClient.GetAsync(_clientData.BaseUrl + $"{KeycloakEndpoints.UserEndpoint(_clientData.RealmName)}" + "?username=sowegef911@segichen.com");
 
-                    return await response?.Content?.ReadAsStringAsync();
+                    var result = await response?.Content?.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<ICollection<UserDetails>>(result);
                 }
             }
             catch (Exception ex)

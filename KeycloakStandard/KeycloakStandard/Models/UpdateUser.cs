@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace KeycloakStandard.Models
 {
@@ -19,6 +20,6 @@ namespace KeycloakStandard.Models
         [JsonProperty("emailVerified")]
         public bool EmailVerified { get; set; }
         [JsonProperty("attributes")]
-        public Attributes Attributes { get; set; }
+        public JObject Attributes { get; set; }
     }
 }

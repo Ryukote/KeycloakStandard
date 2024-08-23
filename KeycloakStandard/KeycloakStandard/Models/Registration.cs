@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace KeycloakStandard.Models
+﻿namespace KeycloakStandard.Models
 {
     /// <summary>
     /// Data for registering a new user.
