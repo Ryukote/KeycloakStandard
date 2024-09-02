@@ -1,4 +1,4 @@
-﻿namespace KeycloakStandard.Models
+﻿namespace KeycloakStandard.Models.User
 {
     /// <summary>
     /// Data for logging user out.

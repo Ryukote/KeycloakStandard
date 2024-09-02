@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace KeycloakStandard.Models
+namespace KeycloakStandard.Models.Client
 {
     /// <summary>
     /// Data for Keycloak client.

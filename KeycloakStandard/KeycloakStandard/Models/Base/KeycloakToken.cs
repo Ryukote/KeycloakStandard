@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace KeycloakStandard.Models
+namespace KeycloakStandard.Models.Base
 {
     /// <summary>
     /// Token information from Keycloak.

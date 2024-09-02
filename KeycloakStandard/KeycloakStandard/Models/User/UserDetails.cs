@@ -1,14 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace KeycloakStandard.Models
+namespace KeycloakStandard.Models.User
 {
     public class UserDetails
     {
         [JsonProperty("id")]
         public string Id { get; set; }
         [JsonProperty("createdTimestamp")]
-        public Int64 CreatedTimestamp { get; set; }
+        public long CreatedTimestamp { get; set; }
         [JsonProperty("username")]
         public string Username { get; set; }
         [JsonProperty("enabled")]

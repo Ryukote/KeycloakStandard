@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
-namespace KeycloakStandard.Models
+namespace KeycloakStandard.Models.User
 {
-    public class UpdateUser
+    public class CreateUser
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
         [JsonProperty("email")]
         public string Email { get; set; }
         [JsonProperty("username")]
@@ -15,11 +14,13 @@ namespace KeycloakStandard.Models
         public string FirstName { get; set; }
         [JsonProperty("lastName")]
         public string LastName { get; set; }
+        [JsonProperty("credentials")]
+        public ICollection<Credentials> Credentials { get; set; }
         [JsonProperty("enabled")]
         public bool Enabled { get; set; }
         [JsonProperty("emailVerified")]
         public bool EmailVerified { get; set; }
         [JsonProperty("attributes")]
-        public JObject Attributes { get; set; }
+        public string Attributes { get; set; }
     }
 }

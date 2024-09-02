@@ -1,4 +1,4 @@
-﻿namespace KeycloakStandard.Models
+﻿namespace KeycloakStandard.Models.User
 {
     /// <summary>
     /// Data for registering a new user.
@@ -14,6 +14,6 @@
         public string Password { get; set; }
         public string CredentialType { get; set; }
         public bool Temporary { get; set; }
-        public Attributes Attributes { get; set; }
+        public string Attributes { get; set; }
     }
 }

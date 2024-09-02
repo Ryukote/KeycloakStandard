@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace KeycloakStandard.Models
+namespace KeycloakStandard.Models.User
 {
     public class UserInfo
     {
@@ -12,5 +12,7 @@ namespace KeycloakStandard.Models
         public string LastName { get; set; }
         [JsonProperty("email")]
         public string Email { get; set; }
+        [JsonProperty("attributes")]
+        public Attributes Attributes { get; set; }
     }
 }
