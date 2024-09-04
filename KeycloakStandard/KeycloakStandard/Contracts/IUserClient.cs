@@ -62,6 +62,6 @@ namespace KeycloakStandard.Contracts
         /// </summary>
         /// <param name="keycloakUserId">User Id that can be found in Keycloak when viewing user in the realm.</param>
         /// <returns></returns>
-        Task<UserInfo> GetUserInfo(string keycloakUserId);
+        Task<dynamic> GetUserInfo(string keycloakUserId);
     }
 }

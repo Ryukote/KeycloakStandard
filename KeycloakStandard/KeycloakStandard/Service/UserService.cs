@@ -277,7 +277,7 @@ namespace KeycloakStandard.Service
             }
         }
 
-        public async Task<UserInfo> GetUserInfo(string keycloakUserId)
+        public async Task<dynamic> GetUserInfo(string keycloakUserId)
         {
             try
             {
@@ -292,7 +292,7 @@ namespace KeycloakStandard.Service
                     if (response.StatusCode.Equals(HttpStatusCode.OK))
                     {
                         var data = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<UserInfo>(data);
+                        return JsonConvert.DeserializeObject<dynamic>(data);
                     }
 
                     if (response.StatusCode.Equals(HttpStatusCode.Unauthorized))
