@@ -293,6 +293,7 @@ namespace KeycloakStandard.Service
                     {
                         var data = await response.Content.ReadAsStringAsync();
                         return JsonConvert.DeserializeObject<dynamic>(data);
+                        //return (dynamic)data;
                     }
 
                     if (response.StatusCode.Equals(HttpStatusCode.Unauthorized))
@@ -303,6 +304,11 @@ namespace KeycloakStandard.Service
                     else if (response.StatusCode.Equals(HttpStatusCode.Forbidden))
                     {
                         throw new Exception();
+                    }
+
+                    else if (response.StatusCode.Equals(HttpStatusCode.NotFound))
+                    {
+                        return null;
                     }
 
                     throw new Exception();
