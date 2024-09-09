@@ -1,4 +1,6 @@
-﻿namespace KeycloakStandard.Models.User
+﻿using Newtonsoft.Json;
+
+namespace KeycloakStandard.Models.User
 {
     /// <summary>
     /// Data for registering a new user.
@@ -14,6 +16,7 @@
         public string Password { get; set; }
         public string CredentialType { get; set; }
         public bool Temporary { get; set; }
-        public string Attributes { get; set; }
+        [JsonProperty("attributes")]
+        public PlainAttributes Attributes { get; set; }
     }
 }

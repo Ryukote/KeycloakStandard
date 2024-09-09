@@ -21,6 +21,12 @@ namespace KeycloakStandard.Models.User
         [JsonProperty("emailVerified")]
         public bool EmailVerified { get; set; }
         [JsonProperty("attributes")]
-        public string Attributes { get; set; }
+        public PlainAttributes Attributes { get; set; }
+    }
+
+    public class PlainAttributes
+    {
+        public string OrganizationId { get; set; }
+        public string UserEnvironmentRoles { get; set; }
     }
 }
