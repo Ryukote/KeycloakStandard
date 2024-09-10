@@ -6,10 +6,10 @@
     <RepositoryUrl>https://github.com/Ryukote/KeycloakStandard</RepositoryUrl>
     <Authors>Antonio Halužan</Authors>
     <Company />
-    <Description>Keycloak client for .NET Standard (Test version).</Description>
-    <AssemblyVersion>1.0.9.8</AssemblyVersion>
-    <FileVersion>1.0.9.8</FileVersion>
-    <Version>1.0.9.8</Version>
+    <Description>Keycloak client for .NET Standard (Test version). Do not use this in your projects.</Description>
+    <AssemblyVersion>1.0.9.9</AssemblyVersion>
+    <FileVersion>1.0.9.9</FileVersion>
+    <Version>1.0.9.9</Version>
     <SignAssembly>False</SignAssembly>
   </PropertyGroup>
 
