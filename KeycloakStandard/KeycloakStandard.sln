@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12217.157 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeycloakStandard", "KeycloakStandard\KeycloakStandard.csproj", "{9370DCC0-28D3-4C65-B967-F011607D1CCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeycloakDemo", "KeycloakDemo\KeycloakDemo.csproj", "{993D1F68-B15C-BF19-4BF0-282D27E374CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeycloakNet10", "KeycloakNet10\KeycloakNet10.csproj", "{62AA3E5E-DDD2-B4CB-4010-6A518BA20744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeycloakNet10.Demo", "KeycloakNet10.Demo\KeycloakNet10.Demo.csproj", "{AD4D3420-97E5-9271-08DB-DB145F591702}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeycloakNet10.Tests", "KeycloakNet10.Tests\KeycloakNet10.Tests.csproj", "{2646BB15-9BF4-64BE-5E47-5AB0712F1BCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{9370DCC0-28D3-4C65-B967-F011607D1CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9370DCC0-28D3-4C65-B967-F011607D1CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9370DCC0-28D3-4C65-B967-F011607D1CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993D1F68-B15C-BF19-4BF0-282D27E374CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993D1F68-B15C-BF19-4BF0-282D27E374CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993D1F68-B15C-BF19-4BF0-282D27E374CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993D1F68-B15C-BF19-4BF0-282D27E374CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62AA3E5E-DDD2-B4CB-4010-6A518BA20744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62AA3E5E-DDD2-B4CB-4010-6A518BA20744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62AA3E5E-DDD2-B4CB-4010-6A518BA20744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62AA3E5E-DDD2-B4CB-4010-6A518BA20744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD4D3420-97E5-9271-08DB-DB145F591702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD4D3420-97E5-9271-08DB-DB145F591702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD4D3420-97E5-9271-08DB-DB145F591702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD4D3420-97E5-9271-08DB-DB145F591702}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2646BB15-9BF4-64BE-5E47-5AB0712F1BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2646BB15-9BF4-64BE-5E47-5AB0712F1BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2646BB15-9BF4-64BE-5E47-5AB0712F1BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2646BB15-9BF4-64BE-5E47-5AB0712F1BCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
